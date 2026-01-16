@@ -18,16 +18,4 @@ class AppTypography {
     fontWeight: FontWeight.w400,
     fontSize: 20,
   );
-
-  static TextStyle bodyRegularWith({Color? color}) {
-    return bodyRegular.copyWith(color: color);
-  }
-
-  static TextStyle subtitleMediumWith({Color? color}) {
-    return subtitleMedium.copyWith(color: color);
-  }
-
-  static TextStyle headingRetroWith({Color? color}) {
-    return headingRetro.copyWith(color: color);
-  }
 }

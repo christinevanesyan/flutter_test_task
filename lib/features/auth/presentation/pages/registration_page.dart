@@ -8,8 +8,8 @@ import 'package:flutter_test_task/features/auth/presentation/bloc/auth_bloc.dart
 import 'package:flutter_test_task/features/auth/presentation/bloc/auth_event.dart';
 import 'package:flutter_test_task/features/auth/presentation/bloc/auth_state.dart';
 import 'package:flutter_test_task/features/auth/presentation/widgets/custom_text_field.dart';
-import 'package:flutter_test_task/features/new_image/presentation/pages/new_image_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_test_task/features/gallery/presentation/pages/gallery_page.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
@@ -43,7 +43,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       listener: (context, state) {
         if (state is AuthAuthenticated) {
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const NewImagePage()),
+            MaterialPageRoute(builder: (context) => const GalleryPage()),
           );
         } else if (state is AuthError) {
           ScaffoldMessenger.of(context).showSnackBar(

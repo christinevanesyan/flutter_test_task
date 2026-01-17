@@ -12,6 +12,12 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/arrow_left.svg
+  String get arrowLeft => 'assets/icons/arrow_left.svg';
+
+  /// File path: assets/icons/check.svg
+  String get check => 'assets/icons/check.svg';
+
   /// File path: assets/icons/download.svg
   String get download => 'assets/icons/download.svg';
 
@@ -20,6 +26,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/gallery.svg
   String get gallery => 'assets/icons/gallery.svg';
+
+  /// File path: assets/icons/logout.svg
+  String get logout => 'assets/icons/logout.svg';
 
   /// File path: assets/icons/palette.svg
   String get palette => 'assets/icons/palette.svg';
@@ -44,9 +53,12 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<String> get values => [
+        arrowLeft,
+        check,
         download,
         eraser,
         gallery,
+        logout,
         palette,
         pattern,
         pencil,
@@ -60,15 +72,12 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/README.md
-  String get readme => 'assets/images/README.md';
-
   /// File path: assets/images/splash_screen.png
   AssetGenImage get splashScreen =>
       const AssetGenImage('assets/images/splash_screen.png');
 
   /// List of all assets
-  List<dynamic> get values => [readme, splashScreen];
+  List<AssetGenImage> get values => [splashScreen];
 }
 
 class Assets {

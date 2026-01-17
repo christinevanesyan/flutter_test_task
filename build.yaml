@@ -1,0 +1,21 @@
+targets:
+  $default:
+    builders:
+      flutter_gen|gen_for_assets:
+        enabled: true
+        options:
+          # Asset generation options
+          assets:
+            enabled: true
+            package_parameter_enabled: false
+            style: snake-case
+            outputs:
+              class_name: Assets
+              
+          # Font generation options
+          fonts:
+            enabled: true
+            
+          # Color generation options
+          colors:
+            enabled: false

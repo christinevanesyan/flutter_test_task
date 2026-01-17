@@ -3,12 +3,15 @@ import 'package:flutter_test_task/core/constants/app_colors.dart';
 
 class PrimaryButton extends StatefulWidget {
   final String text;
-
+  final Color? backgroundColor;
+  final Color? textColor;
   final VoidCallback? onPressed;
 
   const PrimaryButton({
     super.key,
     required this.text,
+    this.backgroundColor,
+    this.textColor,
     this.onPressed,
   });
 
@@ -25,8 +28,10 @@ class _PrimaryButtonState extends State<PrimaryButton> {
     return Material(
       color: Colors.transparent,
       child: Ink(
-        decoration: BoxDecoration(
-            borderRadius: _borderRadius, gradient: AppColors.gradient1),
+        decoration: widget.backgroundColor != null
+            ? null
+            : BoxDecoration(
+                borderRadius: _borderRadius, gradient: AppColors.gradient1),
         child: ElevatedButton(
             onPressed: widget.onPressed,
             style: ButtonStyle(
@@ -48,21 +53,19 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                 } else if (states.contains(WidgetState.disabled)) {
                   return AppColors.buttonTextDisable;
                 } else {
-                  return AppColors.white;
+                  return widget.textColor ?? AppColors.white;
                 }
               }),
               overlayColor: WidgetStateProperty.resolveWith<Color?>(
                   (Set<WidgetState> states) => Colors.transparent),
               backgroundColor: WidgetStateProperty.resolveWith<Color?>(
                 (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.pressed)) {
-                    return AppColors.white;
-                  } else if (states.contains(WidgetState.disabled)) {
+                  if (states.contains(WidgetState.disabled)) {
                     return AppColors.buttonDisabled;
                   } else if (states.contains(WidgetState.error)) {
                     return AppColors.buttonError;
                   } else {
-                    return Colors.transparent;
+                    return widget.backgroundColor ?? Colors.transparent;
                   }
                 },
               ),

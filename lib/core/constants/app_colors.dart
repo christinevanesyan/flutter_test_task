@@ -5,7 +5,10 @@ class AppColors {
 
   static const Color white = Color(0xFFEEEEEE);
 
+  static const Color accent = Color(0xFFD3FA61);
+
   static const Color gray = Color(0xFF87858F);
+  static const Color grayLight = Color(0xFFAAABA5);
 
   static const Color background = Color(0xFF131313);
 
@@ -15,8 +18,8 @@ class AppColors {
 
   static const LinearGradient gradient1 = LinearGradient(
     colors: [gradient1Start, gradient1End],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
   );
 
   // Button States
@@ -26,6 +29,8 @@ class AppColors {
   static const Color buttonError = Color(0xFFEF5B6C);
 
   static const Color buttonText = white;
+
+  static const Color buttonTextDisable = Color(0xFF404040);
 
   static const Color buttonTextDark = Color(0xFF1F1D24);
 }

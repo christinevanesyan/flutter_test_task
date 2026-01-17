@@ -1,0 +1,163 @@
+{
+  "@@locale": "ru",
+  
+  "appTitle": "Flutter Test Task",
+  "@appTitle": {
+    "description": "The application title"
+  },
+
+  "login": "Вход",
+  "@login": {
+    "description": "Login page title"
+  },
+
+  "registration": "Регистрация",
+  "@registration": {
+    "description": "Registration page title"
+  },
+
+  "email": "e-mail",
+  "@email": {
+    "description": "Email field label"
+  },
+
+  "emailPlaceholder": "Введите электронную почту",
+  "@emailPlaceholder": {
+    "description": "Email input placeholder"
+  },
+
+  "emailPlaceholderReg": "Ваша электронная почта",
+  "@emailPlaceholderReg": {
+    "description": "Email input placeholder for registration"
+  },
+
+  "name": "Имя",
+  "@name": {
+    "description": "Name field label"
+  },
+
+  "namePlaceholder": "Введите ваше имя",
+  "@namePlaceholder": {
+    "description": "Name input placeholder"
+  },
+
+  "password": "Пароль",
+  "@password": {
+    "description": "Password field label"
+  },
+
+  "passwordPlaceholder": "Введите пароль",
+  "@passwordPlaceholder": {
+    "description": "Password input placeholder"
+  },
+
+  "passwordConfirmation": "Подтверждение пароля",
+  "@passwordConfirmation": {
+    "description": "Password confirmation field label"
+  },
+
+  "passwordLength": "8-16 символов",
+  "@passwordLength": {
+    "description": "Password length hint"
+  },
+
+  "loginButton": "Войти",
+  "@loginButton": {
+    "description": "Login button text"
+  },
+
+  "registrationButton": "Регистрация",
+  "@registrationButton": {
+    "description": "Registration button text"
+  },
+
+  "registerButton": "Зарегистрироваться",
+  "@registerButton": {
+    "description": "Register submit button text"
+  },
+
+  "enterEmail": "Введите email",
+  "@enterEmail": {
+    "description": "Email validation error"
+  },
+
+  "enterValidEmail": "Введите корректный email",
+  "@enterValidEmail": {
+    "description": "Invalid email validation error"
+  },
+
+  "enterName": "Введите имя",
+  "@enterName": {
+    "description": "Name validation error"
+  },
+
+  "enterPassword": "Введите пароль",
+  "@enterPassword": {
+    "description": "Password validation error"
+  },
+
+  "confirmPassword": "Подтвердите пароль",
+  "@confirmPassword": {
+    "description": "Confirm password validation error"
+  },
+
+  "passwordMismatch": "Пароли не совпадают",
+  "@passwordMismatch": {
+    "description": "Passwords don't match error"
+  },
+
+  "passwordLengthError": "Пароль должен содержать 8-16 символов",
+  "@passwordLengthError": {
+    "description": "Password length validation error"
+  },
+
+  "gallery": "Галерея",
+  "@gallery": {
+    "description": "Gallery screen title"
+  },
+
+  "newImage": "Новое изображение",
+  "@newImage": {
+    "description": "New image button or title"
+  },
+
+  "editing": "Редактирование",
+  "@editing": {
+    "description": "Editing screen title or mode"
+  },
+
+  "userAlreadyExists": "Пользователь уже существует",
+  "@userAlreadyExists": {
+    "description": "Firebase error: user already exists"
+  },
+
+  "wrongPassword": "Неверный пароль",
+  "@wrongPassword": {
+    "description": "Firebase error: wrong password"
+  },
+
+  "userNotFound": "Пользователь не найден",
+  "@userNotFound": {
+    "description": "Firebase error: user not found"
+  },
+
+  "invalidEmail": "Неверный формат email",
+  "@invalidEmail": {
+    "description": "Firebase error: invalid email format"
+  },
+
+  "weakPassword": "Слишком слабый пароль",
+  "@weakPassword": {
+    "description": "Firebase error: weak password"
+  },
+
+  "authError": "Ошибка авторизации",
+  "@authError": {
+    "description": "Generic auth error"
+  },
+
+  "successfulAuth": "Успешная авторизация!",
+  "@successfulAuth": {
+    "description": "Successful authorization message"
+  }
+}

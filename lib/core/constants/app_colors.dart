@@ -33,4 +33,10 @@ class AppColors {
   static const Color buttonTextDisable = Color(0xFF404040);
 
   static const Color buttonTextDark = Color(0xFF1F1D24);
+
+  static Color innerShadowColor1 = const Color(0xFF604490).withOpacity(0.3);
+
+  static Color innerShadowColor2 = const Color(0xFFE3E3E3).withOpacity(0.20);
+
+  static Color innerShadowColor3 = const Color(0xFFC4C4C4).withOpacity(0.2);
 }

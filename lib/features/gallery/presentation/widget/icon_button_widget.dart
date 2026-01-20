@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_test_task/core/constants/app_colors.dart';
 
 class IconButtonWidget extends StatelessWidget {
   const IconButtonWidget(
-      {super.key, required this.iconPath, required this.onTap});
+      {super.key,
+      required this.iconPath,
+      required this.onTap,
+      this.isSelected});
+  final bool? isSelected;
   final String iconPath;
   final VoidCallback onTap;
   @override
@@ -20,6 +25,9 @@ class IconButtonWidget extends StatelessWidget {
           iconPath,
           height: 22,
           width: 22,
+          colorFilter: isSelected == true
+              ? const ColorFilter.mode(AppColors.accent, BlendMode.srcIn)
+              : null,
         ),
       ),
     );

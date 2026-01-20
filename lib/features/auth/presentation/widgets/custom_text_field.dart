@@ -120,6 +120,10 @@ class _InnerShadowBox extends StatelessWidget {
               ),
             ),
           ),
+          Positioned.fill(
+              child: IgnorePointer(
+                  child:
+                      Container(color: AppColors.background.withOpacity(0.2)))),
         ],
       ),
     );

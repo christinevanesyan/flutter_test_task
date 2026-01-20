@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test_task/core/constants/app_colors.dart';
 import 'package:flutter_test_task/core/utils/validators.dart';
 import 'package:flutter_test_task/core/widgets/primary_button.dart';
 import 'package:flutter_test_task/core/widgets/scaffold_widget.dart';
@@ -26,6 +27,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _confirmPasswordController = TextEditingController();
   AuthBloc get _bloc => context.read<AuthBloc>();
 
+  bool _isFormFilled = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _nameController.addListener(_checkFormFilled);
+    _emailController.addListener(_checkFormFilled);
+    _passwordController.addListener(_checkFormFilled);
+    _confirmPasswordController.addListener(_checkFormFilled);
+  }
+
   @override
   void dispose() {
     _nameController.dispose();
@@ -33,6 +46,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
+  }
+
+  void _checkFormFilled() {
+    final isFilled = _nameController.text.trim().isNotEmpty &&
+        _emailController.text.trim().isNotEmpty &&
+        _passwordController.text.isNotEmpty &&
+        _confirmPasswordController.text.isNotEmpty;
+
+    if (isFilled != _isFormFilled) {
+      setState(() {
+        _isFormFilled = isFilled;
+      });
+    }
   }
 
   @override
@@ -60,79 +86,87 @@ class _RegistrationPageState extends State<RegistrationPage> {
           child: SafeArea(
             child: Stack(
               children: [
-                SingleChildScrollView(
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TitleHeader(
-                          title: l10n.registration,
+                CustomScrollView(
+                  slivers: [
+                    SliverFillRemaining(
+                      hasScrollBody: false,
+                      child: Center(
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TitleHeader(
+                                title: l10n.registration,
+                              ),
+                              const SizedBox(height: 20),
+                              CustomTextField(
+                                label: l10n.name,
+                                placeholder: l10n.namePlaceholder,
+                                controller: _nameController,
+                                keyboardType: TextInputType.name,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return l10n.enterName;
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 20),
+                              CustomTextField(
+                                label: l10n.email,
+                                placeholder: l10n.emailPlaceholderReg,
+                                controller: _emailController,
+                                keyboardType: TextInputType.emailAddress,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return l10n.enterEmail;
+                                  }
+                                  if (!Validators.isValidEmail(value.trim())) {
+                                    return l10n.enterValidEmail;
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 20),
+                              CustomTextField(
+                                label: l10n.password,
+                                placeholder: l10n.passwordLength,
+                                controller: _passwordController,
+                                isPassword: true,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return l10n.enterPassword;
+                                  }
+                                  if (!Validators.isValidPassword(value)) {
+                                    return l10n.passwordLengthError;
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 20),
+                              CustomTextField(
+                                label: l10n.passwordConfirmation,
+                                placeholder: l10n.passwordLength,
+                                controller: _confirmPasswordController,
+                                isPassword: true,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return l10n.confirmPassword;
+                                  }
+                                  if (value != _passwordController.text) {
+                                    return l10n.passwordMismatch;
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ],
+                          ),
                         ),
-                        const SizedBox(height: 20),
-                        CustomTextField(
-                          label: l10n.name,
-                          placeholder: l10n.namePlaceholder,
-                          controller: _nameController,
-                          keyboardType: TextInputType.name,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return l10n.enterName;
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 20),
-                        CustomTextField(
-                          label: l10n.email,
-                          placeholder: l10n.emailPlaceholderReg,
-                          controller: _emailController,
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return l10n.enterEmail;
-                            }
-                            if (!Validators.isValidEmail(value.trim())) {
-                              return l10n.enterValidEmail;
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 20),
-                        CustomTextField(
-                          label: l10n.password,
-                          placeholder: l10n.passwordLength,
-                          controller: _passwordController,
-                          isPassword: true,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return l10n.enterPassword;
-                            }
-                            if (!Validators.isValidPassword(value)) {
-                              return l10n.passwordLengthError;
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 20),
-                        CustomTextField(
-                          label: l10n.passwordConfirmation,
-                          placeholder: l10n.passwordLength,
-                          controller: _confirmPasswordController,
-                          isPassword: true,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return l10n.confirmPassword;
-                            }
-                            if (value != _passwordController.text) {
-                              return l10n.passwordMismatch;
-                            }
-                            return null;
-                          },
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
                 Positioned(
                   child: Align(
@@ -141,15 +175,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       builder: (context, state) {
                         return PrimaryButton(
                           text: l10n.registerButton,
-                          onPressed: () {
-                            if ((_formKey.currentState?.validate() ?? false)) {
-                              _bloc.add(RegisterEvent(
-                                email: _emailController.text.trim(),
-                                password: _passwordController.text,
-                                displayName: _nameController.text.trim(),
-                              ));
-                            }
-                          },
+                          backgroundColor: AppColors.white,
+                          textColor: AppColors.background,
+                          onPressed: _isFormFilled
+                              ? () {
+                                  if ((_formKey.currentState?.validate() ??
+                                      false)) {
+                                    _bloc.add(RegisterEvent(
+                                      email: _emailController.text.trim(),
+                                      password: _passwordController.text,
+                                      displayName: _nameController.text.trim(),
+                                    ));
+                                  }
+                                }
+                              : null,
                         );
                       },
                     ),

@@ -59,46 +59,50 @@ class _LoginPageState extends State<LoginPage> {
             key: _formKey,
             child: Stack(
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TitleHeader(
-                      title: l10n.login,
+                Center(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TitleHeader(
+                          title: l10n.login,
+                        ),
+                        const SizedBox(height: 20),
+                        CustomTextField(
+                          label: l10n.email,
+                          placeholder: l10n.emailPlaceholder,
+                          controller: _emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return l10n.enterEmail;
+                            }
+                            if (!Validators.isValidEmail(value.trim())) {
+                              return l10n.enterValidEmail;
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        CustomTextField(
+                          label: l10n.passwordConfirmation,
+                          placeholder: l10n.passwordPlaceholder,
+                          controller: _passwordController,
+                          isPassword: true,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return l10n.enterPassword;
+                            }
+                            if (!Validators.isValidPassword(value)) {
+                              return l10n.passwordLengthError;
+                            }
+                            return null;
+                          },
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 20),
-                    CustomTextField(
-                      label: l10n.email,
-                      placeholder: l10n.emailPlaceholder,
-                      controller: _emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return l10n.enterEmail;
-                        }
-                        if (!Validators.isValidEmail(value.trim())) {
-                          return l10n.enterValidEmail;
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    CustomTextField(
-                      label: l10n.passwordConfirmation,
-                      placeholder: l10n.passwordPlaceholder,
-                      controller: _passwordController,
-                      isPassword: true,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return l10n.enterPassword;
-                        }
-                        if (!Validators.isValidPassword(value)) {
-                          return l10n.passwordLengthError;
-                        }
-                        return null;
-                      },
-                    ),
-                  ],
+                  ),
                 ),
                 Positioned.fill(
                   child: Column(

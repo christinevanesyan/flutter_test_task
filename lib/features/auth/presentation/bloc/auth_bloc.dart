@@ -3,14 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test_task/features/auth/data/datasources/firebase_auth_datasource.dart';
 import 'package:flutter_test_task/features/auth/presentation/bloc/auth_event.dart';
 import 'package:flutter_test_task/features/auth/presentation/bloc/auth_state.dart';
+import 'package:flutter_test_task/core/extension/transform_extension.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final FirebaseAuthDataSource authDataSource;
+  final FirebaseAuthDataSource firebaseAuthDataSource;
 
-  AuthBloc({required this.authDataSource}) : super(const AuthInitial()) {
-    on<LoginEvent>(_onLogin);
-    on<RegisterEvent>(_onRegister);
-    on<LogoutEvent>(_onLogout);
+  AuthBloc({required this.firebaseAuthDataSource})
+      : super(const AuthInitial()) {
+    on<LoginEvent>(_onLogin, transformer: debounce());
+    on<RegisterEvent>(_onRegister, transformer: debounce());
+    on<LogoutEvent>(_onLogout, transformer: debounce());
     on<CheckAuthStatusEvent>(_onCheckAuthStatus);
   }
 
@@ -21,7 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(const AuthLoading());
 
     try {
-      final user = await authDataSource.signIn(
+      final user = await firebaseAuthDataSource.signIn(
         email: event.email,
         password: event.password,
       );
@@ -45,7 +47,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(const AuthLoading());
 
     try {
-      final user = await authDataSource.register(
+      final user = await firebaseAuthDataSource.register(
         email: event.email,
         password: event.password,
         displayName: event.displayName,
@@ -70,7 +72,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(const AuthLoading());
 
     try {
-      await authDataSource.signOut();
+      await firebaseAuthDataSource.signOut();
       emit(const AuthLogoutSuccess());
     } catch (e) {
       emit(AuthError('Logout failed: $e'));
@@ -81,7 +83,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     CheckAuthStatusEvent event,
     Emitter<AuthState> emit,
   ) async {
-    final user = authDataSource.currentUser;
+    final user = firebaseAuthDataSource.currentUser;
 
     if (user != null) {
       emit(AuthAuthenticated(

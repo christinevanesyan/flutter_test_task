@@ -30,6 +30,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/logout.svg
   String get logout => 'assets/icons/logout.svg';
 
+  /// File path: assets/icons/paint.svg
+  String get paint => 'assets/icons/paint.svg';
+
   /// File path: assets/icons/palette.svg
   String get palette => 'assets/icons/palette.svg';
 
@@ -59,6 +62,7 @@ class $AssetsIconsGen {
         eraser,
         gallery,
         logout,
+        paint,
         palette,
         pattern,
         pencil,

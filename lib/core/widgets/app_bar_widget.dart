@@ -3,8 +3,12 @@ import 'package:flutter_test_task/core/constants/app_colors.dart';
 import 'package:flutter_test_task/core/widgets/inner_shadow_container.dart';
 
 class AppBarWidget extends StatelessWidget {
-  const AppBarWidget(
-      {super.key, this.leading, this.trailing, required this.title});
+  const AppBarWidget({
+    super.key,
+    this.leading,
+    this.trailing,
+    required this.title,
+  });
   final Widget? leading;
   final Widget? trailing;
   final String title;

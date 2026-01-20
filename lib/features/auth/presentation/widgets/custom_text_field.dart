@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test_task/core/constants/app_colors.dart';
 
@@ -23,8 +25,8 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: InnerShadowPainter(blur: 40, color: const Color(0x33E3E3E3)),
+    return _InnerShadowBox(
+      borderRadius: 8.0,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -71,33 +73,55 @@ class CustomTextField extends StatelessWidget {
   }
 }
 
-class InnerShadowPainter extends CustomPainter {
-  final double blur;
-  final Color color;
+class _InnerShadowBox extends StatelessWidget {
+  const _InnerShadowBox({
+    required this.child,
+    required this.borderRadius,
+  });
 
-  InnerShadowPainter({required this.blur, required this.color});
+  final Widget child;
+  final double borderRadius;
 
   @override
-  void paint(Canvas canvas, Size size) {
-    final rect = const Offset(0, 1) & size;
-
-    final bgPaint = Paint()..color = color;
-    final rrect = const BorderRadius.all(Radius.circular(16)).toRRect(rect);
-    canvas.drawRRect(rrect, bgPaint);
-
-    final shadowPaint = Paint()
-      ..color = Colors.black26
-      ..maskFilter = MaskFilter.blur(BlurStyle.inner, blur);
-    final borderPaint = Paint()
-      ..color = AppColors.gray
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1;
-    canvas.drawRRect(rrect, borderPaint);
-    canvas.saveLayer(rect, Paint());
-    canvas.drawRRect(rrect, shadowPaint);
-    canvas.restore();
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(borderRadius),
+      child: Stack(
+        children: [
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 100, sigmaY: 100),
+            child: Container(),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(borderRadius),
+              border: Border.all(
+                width: 0.5,
+                color: const Color(0xFF87858F),
+              ),
+            ),
+            child: child,
+          ),
+          Positioned.fill(
+            child: IgnorePointer(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(borderRadius),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFFE3E3E3).withOpacity(0.2),
+                      offset: const Offset(0, 1),
+                      blurRadius: 40,
+                      spreadRadius: 0,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
